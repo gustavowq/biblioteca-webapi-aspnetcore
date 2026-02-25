@@ -1,88 +1,97 @@
-# 📚 Sistema de Biblioteca em C# (.NET)
+# 📚 Biblioteca API - Gerenciador de Empréstimos
 
-Um projeto de console desenvolvido em **C# (.NET 8)** que simula o funcionamento de uma biblioteca, com **cadastro de usuários**, **gerenciamento de livros** e **controle de empréstimos e devoluções**.  
-O objetivo é praticar **Programação Orientada a Objetos (POO)**, **organização de classes** e **operações de gerenciamento de dados**.
+![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen) ![Platform](https://img.shields.io/badge/Platform-.NET%208-blueviolet) ![License](https://img.shields.io/badge/License-MIT-blue)
 
----
+## 🚀 Sobre o Projeto
 
-## 🚀 Funcionalidades
+O **Biblioteca API** é uma aplicação RESTful desenvolvida para gerenciar o ecossistema de uma biblioteca, controlando o fluxo de livros, leitores e empréstimos.
 
-- 👤 **Gerenciamento de Pessoas**  
-  - Cadastro de usuários com validação de nome e e-mail.  
-  - Busca e verificação de usuários existentes.  
+Este projeto foi construído com foco em **Arquitetura em Camadas**, visando desacoplamento, testabilidade e manutenção. O objetivo principal é demonstrar a aplicação prática de conceitos sólidos de Engenharia de Software no ecossistema .NET.
 
-- 📘 **Gerenciamento de Livros**  
-  - Cadastro e listagem de livros disponíveis.  
-  - Busca de livros por nome.  
-  - Controle de disponibilidade (livros emprestados ou devolvidos).  
+> 🚧 **Status do Projeto:** Em evolução contínua. Novas features de arquitetura e segurança estão sendo implementadas semanalmente.
 
-- 🔄 **Empréstimos e Devoluções**  
-  - Associação direta entre o objeto **Pessoa** e o objeto **Livro**.  
-  - Bloqueio de empréstimo para livros já emprestados.  
-  - Devolução com atualização automática do status do livro.  
+## 🛠 Tecnologias e Práticas Utilizadas
 
----
+O projeto utiliza o que há de mais moderno no desenvolvimento Back-end com C#:
 
-## 🧠 Conceitos Aplicados
+- **.NET 8 (Core):** Framework principal.
+- **Entity Framework Core:** ORM para acesso a dados (Code-First).
+- **SQL Server:** Banco de dados relacional.
+- **Swagger (OpenAPI):** Documentação interativa dos endpoints.
+- **Injeção de Dependência:** Gestão do ciclo de vida dos objetos (Scoped).
+- **Padrão Repository:** Abstração da camada de acesso a dados.
+- **Padrão Service:** Isolamento das regras de negócio (Validações de disponibilidade, lógica de empréstimo).
+- **DTOs (Data Transfer Objects):** Segurança e filtro no tráfego de dados.
+- **Mapeamento de Relacionamentos:** Configuração de Chaves Estrangeiras (FKs) e Propriedades de Navegação.
 
-- **Programação Orientada a Objetos (POO)**  
-  - Uso de classes, objetos, métodos e encapsulamento.  
-- **Operações de Gerenciamento (Create, Read, Update)**  
-  - Criação, busca e atualização de registros.  
-- **Validação de dados** e controle de fluxo.  
-- **Listas genéricas (`List<T>`)** para armazenamento dinâmico.  
-- **Métodos estáticos e de instância** para modularização de funções.  
-- **Boas práticas de separação de responsabilidades e estrutura de código.**
+## 🏗 Arquitetura do Projeto
 
----
+A solução foi dividida para respeitar o princípio da Separação de Responsabilidades (SoC):
 
-## 🧩 Estrutura do Projeto
+📂 Biblioteca
+├── 📂 Controllers   # Pontos de entrada (Endpoints HTTP)
+├── 📂 Services      # Regras de Negócio (ex: Verificar se livro está disponível)
+├── 📂 Repositories  # Acesso direto ao Banco de Dados
+├── 📂 Entities      # Modelos do Domínio (Espelho do Banco)
+├── 📂 DTOs          # Objetos de transporte (Request/Response)
+└── 📂 Context       # Configuração do Entity Framework
 
-```
-📦 Biblioteca
- ┣ 📜 Program.cs          → Menu principal e fluxo da aplicação
- ┣ 📜 Pessoa.cs           → Classe responsável pelo cadastro e busca de pessoas
- ┣ 📜 Livros.cs           → Classe responsável pelo controle de livros e empréstimos
- ┣ 📜 Biblioteca.csproj   → Configurações do projeto .NET
- ┗ 📜 README.md           → Documentação do projeto
-```
 
----
+## ✨ Funcionalidades Principais
 
-## 💻 Tecnologias Utilizadas
+- **Gestão de Livros:** Cadastro e consulta de acervo.
+- **Gestão de Leitores (Pessoas):** Cadastro de usuários.
+- **Motor de Empréstimos:**
+  - Validação automática de disponibilidade do livro.
+  - Verificação de existência de cadastro.
+  - Registro de datas de empréstimo e previsão de devolução.
+- **Devolução:** Processamento de retorno de livros ao acervo.
 
-- **C# (.NET 8)**  
-- **Paradigma de POO**  
-- **Console Application**  
-- **Git & GitHub**  
+## 🚀 Como Rodar o Projeto
 
----
+### Pré-requisitos
+- .NET SDK 8.0+
+- SQL Server (Express ou LocalDB)
+- Visual Studio 2022 ou VS Code
 
-## 🧪 Como Executar o Projeto
+### Passo a Passo
 
-1. Clone este repositório:  
+1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/gustavowq/bibilioteca-
-   ```
-2. Acesse o diretório:  
-   ```bash
-   cd bibilioteca-
-   ```
-3. Execute o projeto:  
-   ```bash
-   dotnet run
-   ```
+   git clone [https://github.com/seu-usuario/biblioteca-api.git](https://github.com/seu-usuario/biblioteca-api.git)
+Configure o Banco de Dados:
+No arquivo appsettings.json, ajuste a ConnectionString para o seu servidor SQL local.
 
----
+Aplique as Migrations:
+Abra o terminal na pasta do projeto e execute:
 
-## 🧾 Observações
+PowerShell
 
-Este projeto foi desenvolvido com fins **educacionais e de prática** em **C# e Programação Orientada a Objetos**, como parte do aprendizado pessoal de desenvolvimento backend.
+dotnet ef database update
+Execute a Aplicação:
 
----
+PowerShell
 
-## 👨‍💻 Autor
+dotnet run
+Acesse o Swagger em: https://localhost:7034/swagger (ou a porta indicada no seu terminal).
 
-**Gustavo Henrique Santil dos Santos**  
-📧 [gustavohenriquesantil@gmail.com](mailto:gustavohenriquesantil@gmail.com)  
-🔗 [Repositório no GitHub](https://github.com/gustavowq/bibilioteca-)
+🔮 Roadmap (Próximos Passos)
+O projeto segue um plano de estudos avançado para implementação de padrões corporativos:
+
+[x] Separação em Camadas (Service/Repository)
+
+[x] Implementação de DTOs
+
+[ ] Notification Pattern: Substituição de Exceptions por notificações de domínio.
+
+[ ] Base Controller: Padronização de respostas da API (Envelopamento).
+
+[ ] Unit Tests: Cobertura de testes com xUnit e Moq.
+
+[ ] Autenticação JWT: Proteção de rotas sensíveis.
+
+🤝 Contato
+Gustavo Henrique - Desenvolvedor Back-end .NET
+LinkedIn | Email
+📧 [gustavohenriquesantil@gmail.com](email:gustavohenriquesantil@gmail.com)  
+🔗www.linkedin.com/in/gustavo-santil

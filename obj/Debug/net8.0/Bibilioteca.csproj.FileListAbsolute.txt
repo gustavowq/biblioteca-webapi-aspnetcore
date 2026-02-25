@@ -1,4 +1,0 @@
-C:\projetos\Bibilioteca\obj\Debug\net8.0\Bibilioteca.GeneratedMSBuildEditorConfig.editorconfig
-C:\projetos\Bibilioteca\obj\Debug\net8.0\Bibilioteca.AssemblyInfoInputs.cache
-C:\projetos\Bibilioteca\obj\Debug\net8.0\Bibilioteca.AssemblyInfo.cs
-C:\projetos\Bibilioteca\obj\Debug\net8.0\Bibilioteca.csproj.CoreCompileInputs.cache

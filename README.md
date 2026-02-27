@@ -4,7 +4,7 @@
 
 ## 🚀 Sobre o Projeto
 
-O **Biblioteca API** é uma aplicação RESTful desenvolvida para gerenciar o ecossistema de uma biblioteca, controlando o fluxo de livros, leitores e empréstimos.
+O **Biblioteca API** é uma aplicação REST desenvolvida para gerenciar o ecossistema de uma biblioteca, controlando o fluxo de livros, leitores e empréstimos.
 
 Este projeto foi construído com foco em **Arquitetura em Camadas**, visando desacoplamento, testabilidade e manutenção. O objetivo principal é demonstrar a aplicação prática de conceitos sólidos de Engenharia de Software no ecossistema .NET.
 

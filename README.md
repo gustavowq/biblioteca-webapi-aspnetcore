@@ -1,97 +1,104 @@
-# 📚 Biblioteca API - Gerenciador de Empréstimos
+📚 Biblioteca API — Gerenciador de Empréstimos (ASP.NET Core)
+
+API REST em ASP.NET Core (.NET 8) para gerenciar livros, leitores e o fluxo de empréstimos/devoluções, com regras de negócio (disponibilidade, validações) e arquitetura em camadas.
 
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen) ![Platform](https://img.shields.io/badge/Platform-.NET%208-blueviolet) ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ## 🚀 Sobre o Projeto
 
-O **Biblioteca API** é uma aplicação REST desenvolvida para gerenciar o ecossistema de uma biblioteca, controlando o fluxo de livros, leitores e empréstimos.
+Pré-requisitos
 
-Este projeto foi construído com foco em **Arquitetura em Camadas**, visando desacoplamento, testabilidade e manutenção. O objetivo principal é demonstrar a aplicação prática de conceitos sólidos de Engenharia de Software no ecossistema .NET.
+.NET SDK 8+
 
-> 🚧 **Status do Projeto:** Em evolução contínua. Novas features de arquitetura e segurança estão sendo implementadas semanalmente.
+SQL Server (Express/LocalDB)
 
-## 🛠 Tecnologias e Práticas Utilizadas
-
-O projeto utiliza o que há de mais moderno no desenvolvimento Back-end com C#:
-
-- **.NET 8 (Core):** Framework principal.
-- **Entity Framework Core:** ORM para acesso a dados (Code-First).
-- **SQL Server:** Banco de dados relacional.
-- **Swagger (OpenAPI):** Documentação interativa dos endpoints.
-- **Injeção de Dependência:** Gestão do ciclo de vida dos objetos (Scoped).
-- **Padrão Repository:** Abstração da camada de acesso a dados.
-- **Padrão Service:** Isolamento das regras de negócio (Validações de disponibilidade, lógica de empréstimo).
-- **DTOs (Data Transfer Objects):** Segurança e filtro no tráfego de dados.
-- **Mapeamento de Relacionamentos:** Configuração de Chaves Estrangeiras (FKs) e Propriedades de Navegação.
-
-## 🏗 Arquitetura do Projeto
-
-A solução foi dividida para respeitar o princípio da Separação de Responsabilidades (SoC):
-
-📂 Biblioteca
-├── 📂 Controllers   # Pontos de entrada (Endpoints HTTP)
-├── 📂 Services      # Regras de Negócio (ex: Verificar se livro está disponível)
-├── 📂 Repositories  # Acesso direto ao Banco de Dados
-├── 📂 Entities      # Modelos do Domínio (Espelho do Banco)
-├── 📂 DTOs          # Objetos de transporte (Request/Response)
-└── 📂 Context       # Configuração do Entity Framework
-
-
-## ✨ Funcionalidades Principais
-
-- **Gestão de Livros:** Cadastro e consulta de acervo.
-- **Gestão de Leitores (Pessoas):** Cadastro de usuários.
-- **Motor de Empréstimos:**
-  - Validação automática de disponibilidade do livro.
-  - Verificação de existência de cadastro.
-  - Registro de datas de empréstimo e previsão de devolução.
-- **Devolução:** Processamento de retorno de livros ao acervo.
-
-## 🚀 Como Rodar o Projeto
-
-### Pré-requisitos
-- .NET SDK 8.0+
-- SQL Server (Express ou LocalDB)
-- Visual Studio 2022 ou VS Code
-
-### Passo a Passo
-
-1. **Clone o repositório:**
-   ```bash
-   git clone [https://github.com/seu-usuario/biblioteca-api.git](https://github.com/seu-usuario/biblioteca-api.git)
-Configure o Banco de Dados:
-No arquivo appsettings.json, ajuste a ConnectionString para o seu servidor SQL local.
-
-Aplique as Migrations:
-Abra o terminal na pasta do projeto e execute:
-
-PowerShell
-
+Rodando localmente
+git clone https://github.com/gustavowq/biblioteca-webapi-aspnetcore.git
+cd biblioteca-webapi-aspnetcore
+dotnet restore
 dotnet ef database update
-Execute a Aplicação:
-
-PowerShell
-
 dotnet run
-Acesse o Swagger em: https://localhost:7034/swagger (ou a porta indicada no seu terminal).
 
-🔮 Roadmap (Próximos Passos)
-O projeto segue um plano de estudos avançado para implementação de padrões corporativos:
+Acesse o Swagger:
+https://localhost:7034/swagger (ou a porta indicada no terminal)
 
-[x] Separação em Camadas (Service/Repository)
+🧠 Funcionalidades do Sistema
 
-[x] Implementação de DTOs
+Livros:
 
-[ ] Notification Pattern: Substituição de Exceptions por notificações de domínio.
+Cadastro, edição e consulta do acervo
 
-[ ] Base Controller: Padronização de respostas da API (Envelopamento).
+Exposição controlada de dados utilizando DTOs
+-----------------
+Leitores:
 
-[ ] Unit Tests: Cobertura de testes com xUnit e Moq.
+Cadastro e gerenciamento de usuários
 
-[ ] Autenticação JWT: Proteção de rotas sensíveis.
+Vínculo relacional com histórico de empréstimos
+-----------------
+Motor de Empréstimos:
+
+Validação de disponibilidade do livro (bloqueia empréstimos duplicados)
+
+Validação de existência de leitor e livro
+
+Registro automático da data de empréstimo e previsão de devolução
+-----------------
+Devolução:
+
+Atualização do empréstimo via PATCH
+
+Retorno imediato do livro ao status de disponível no acervo
+-----------------
+🧱 Arquitetura
+
+Projeto estruturado em camadas para separação de responsabilidades, manutenção e testabilidade:
+
+Biblioteca/
+ ├── Controllers     # Endpoints HTTP
+ ├── Services        # Regras de negócio
+ ├── Repositories    # Acesso a dados
+ ├── Entities        # Modelos de domínio
+ ├── DTOs            # Request/Response
+ └── Context         # EF Core DbContext
+
+Práticas aplicadas:
+
+POO • SOLID • Injeção de Dependência
+
+Repository + Service
+
+DTOs para controle de contrato e segurança
+
+EF Core Code-First + Migrations
+
+Swagger/OpenAPI
+-----------------
+🛠 Tecnologias
+
+C# • .NET 8 • ASP.NET Core Web API
+
+Entity Framework Core • SQL Server
+
+Swagger/OpenAPI • Git
+-----------------
+🗺 Roadmap
+
+ Camadas (Service/Repository) ✅
+
+ DTOs ✅
+
+ Padronização de respostas (Base Controller / Envelope) 
+
+ Testes unitários (xUnit + Moq)
+
+ Autenticação JWT
+
+ Notification Pattern (substituir exceptions por notificações)
 
 🤝 Contato
-Gustavo Henrique - Desenvolvedor Back-end .NET
-LinkedIn | Email
-📧 [gustavohenriquesantil@gmail.com](email:gustavohenriquesantil@gmail.com)  
-🔗www.linkedin.com/in/gustavo-santil
+
+Gustavo Henrique Santil — Desenvolvedor Back-end .NET
+📧 gustavohenriquesantil@gmail.com
+
+🔗 LinkedIn: www.linkedin.com/in/gustavo-santil
